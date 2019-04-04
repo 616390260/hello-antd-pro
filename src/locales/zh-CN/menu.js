@@ -5,6 +5,7 @@ export default {
   'menu.register.result': '注册结果',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',
+  'menu.dashboard.users': '用户列表',
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
   'menu.form': '表单页',

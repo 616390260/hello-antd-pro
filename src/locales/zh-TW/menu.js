@@ -6,6 +6,7 @@ export default {
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析頁',
   'menu.dashboard.monitor': '監控頁',
+  'menu.dashboard.users': '用戶列表',
   'menu.dashboard.workplace': '工作臺',
   'menu.form': '表單頁',
   'menu.form.basicform': '基礎表單',

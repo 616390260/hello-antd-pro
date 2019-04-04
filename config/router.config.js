@@ -36,6 +36,11 @@ export default [
             component: './Dashboard/Analysis',
           },
           {
+            path: '/dashboard/users',
+            name: 'users',
+            component: './Dashboard/Analysis',
+          },
+          {
             path: '/dashboard/monitor',
             name: 'monitor',
             component: './Dashboard/Monitor',
