@@ -24,7 +24,7 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/dashboard/users', authority: ['admin', 'user'] },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -49,6 +49,23 @@ export default [
             path: '/dashboard/workplace',
             name: 'workplace',
             component: './Dashboard/Workplace',
+          },
+        ],
+      },
+      {
+        path: '/products',
+        name: 'products',
+        icon: 'read',
+        routes: [
+          {
+            path: '/products/articles',
+            name: 'articles',
+            component: './Dashboard/Analysis',
+          },
+          {
+            path: '/products/movies',
+            name: 'movies',
+            component: './Dashboard/Analysis',
           },
         ],
       },
