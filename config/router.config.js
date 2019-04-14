@@ -60,7 +60,7 @@ export default [
           {
             path: '/products/articles',
             name: 'articles',
-            component: './Dashboard/Analysis',
+            component: './Articles/List',
           },
           {
             path: '/products/movies',
