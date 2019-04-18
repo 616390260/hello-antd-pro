@@ -36,8 +36,8 @@ const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
     .join(',');
-const statusMap = ['default', 'processing', 'success', 'error'];
-const status = ['关闭', '运行中', '已上线', '异常'];
+const statusMap = ['show', 'draft'];
+const status = ['显示', '草稿'];
 
 const CreateForm = Form.create()(props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
@@ -274,9 +274,9 @@ class UpdateForm extends PureComponent {
 }
 
 /* eslint react/no-multi-comp:0 */
-@connect(({ rule, loading }) => ({
-  rule,
-  loading: loading.models.rule,
+@connect(({ article, loading }) => ({
+  article,
+  loading: loading.models.article,
 }))
 @Form.create()
 class List extends PureComponent {
@@ -291,7 +291,7 @@ class List extends PureComponent {
 
   columns = [
     {
-      title: '规则名称',
+      title: '标题',
       dataIndex: 'name',
       render: text => <a onClick={() => this.previewItem(text)}>{text}</a>,
     },
@@ -300,7 +300,7 @@ class List extends PureComponent {
       dataIndex: 'desc',
     },
     {
-      title: '服务调用次数',
+      title: '阅读次数',
       dataIndex: 'callNo',
       sorter: true,
       render: val => `${val} 万`,
@@ -319,21 +319,13 @@ class List extends PureComponent {
           text: status[1],
           value: 1,
         },
-        {
-          text: status[2],
-          value: 2,
-        },
-        {
-          text: status[3],
-          value: 3,
-        },
       ],
       render(val) {
         return <Badge status={statusMap[val]} text={status[val]} />;
       },
     },
     {
-      title: '上次调度时间',
+      title: '更新时间',
       dataIndex: 'updatedAt',
       sorter: true,
       render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
@@ -353,7 +345,7 @@ class List extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'rule/fetch',
+      type: 'article/fetch',
     });
   }
 
@@ -378,7 +370,7 @@ class List extends PureComponent {
     }
 
     dispatch({
-      type: 'rule/fetch',
+      type: 'article/fetch',
       payload: params,
     });
   };
@@ -394,7 +386,7 @@ class List extends PureComponent {
       formValues: {},
     });
     dispatch({
-      type: 'rule/fetch',
+      type: 'article/fetch',
       payload: {},
     });
   };
@@ -414,7 +406,7 @@ class List extends PureComponent {
     switch (e.key) {
       case 'remove':
         dispatch({
-          type: 'rule/remove',
+          type: 'article/remove',
           payload: {
             key: selectedRows.map(row => row.key),
           },
@@ -454,7 +446,7 @@ class List extends PureComponent {
       });
 
       dispatch({
-        type: 'rule/fetch',
+        type: 'article/fetch',
         payload: values,
       });
     });
@@ -476,7 +468,7 @@ class List extends PureComponent {
   handleAdd = fields => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'rule/add',
+      type: 'article/add',
       payload: {
         desc: fields.desc,
       },
@@ -490,7 +482,7 @@ class List extends PureComponent {
     const { dispatch } = this.props;
     const { formValues } = this.state;
     dispatch({
-      type: 'rule/update',
+      type: 'article/update',
       payload: {
         query: formValues,
         body: {
@@ -626,7 +618,7 @@ class List extends PureComponent {
 
   render() {
     const {
-      rule: { data },
+      article: { data },
       loading,
     } = this.props;
     const { selectedRows, modalVisible, updateModalVisible, stepFormValues } = this.state;

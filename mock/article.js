@@ -23,7 +23,7 @@ for (let i = 0; i < 46; i += 1) {
   });
 }
 
-function getRule(req, res, u) {
+function getArticle(req, res, u) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
     url = req.url; // eslint-disable-line
@@ -75,7 +75,7 @@ function getRule(req, res, u) {
   return res.json(result);
 }
 
-function postRule(req, res, u, b) {
+function postArticle(req, res, u, b) {
   let url = u;
   if (!url || Object.prototype.toString.call(url) !== '[object String]') {
     url = req.url; // eslint-disable-line
@@ -122,10 +122,10 @@ function postRule(req, res, u, b) {
       break;
   }
 
-  return getRule(req, res, u);
+  return getArticle(req, res, u);
 }
 
 export default {
-  'GET /api/rule': getRule,
-  'POST /api/rule': postRule,
+  'GET /api/article': getArticle,
+  'POST /api/article': postArticle,
 };
