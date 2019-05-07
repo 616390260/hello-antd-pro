@@ -6,7 +6,6 @@ export default {
   state: {
     data: {
       list: [],
-      pagination: {},
     },
   },
 
