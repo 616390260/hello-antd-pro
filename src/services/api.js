@@ -47,6 +47,10 @@ export async function queryArticle(params) {
   return request(`/api/article?${stringify(params)}`);
 }
 
+export async function queryUser(params) {
+  return request(`/api/users?${stringify(params)}`);
+}
+
 export async function removeArticle(params) {
   return request('/api/article', {
     method: 'POST',

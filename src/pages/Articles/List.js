@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Table } from 'antd';
+import { Table, Card } from 'antd';
+import { connect } from 'dva';
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
+@connect(props => {
+  console.log(props);
+})
 class List extends PureComponent {
   dataSource = [
     {
@@ -35,8 +40,22 @@ class List extends PureComponent {
     },
   ];
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    console.log(this.props);
+    dispatch({
+      type: 'users/fetch',
+    });
+  }
+
   render() {
-    return <Table dataSource={this.dataSource} columns={this.columns} />;
+    return (
+      <PageHeaderWrapper title="用户列表">
+        <Card>
+          <Table dataSource={this.dataSource} columns={this.columns} />
+        </Card>
+      </PageHeaderWrapper>
+    );
   }
 }
 
