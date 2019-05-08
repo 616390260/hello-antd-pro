@@ -27,15 +27,15 @@ class List extends PureComponent {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    console.log(this.props);
     dispatch({
       type: 'users/fetch',
     });
   }
 
   render() {
-    console.log(this.props.users);
-    const { data, list } = this.props;
+    const {
+      data: { list },
+    } = this.props;
     // const data = this.props.data;
     return (
       <PageHeaderWrapper title="用户列表">
