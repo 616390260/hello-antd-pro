@@ -3,8 +3,9 @@ import { Table, Card } from 'antd';
 import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
-@connect(({ users }) => ({
+@connect(({ users, loading }) => ({
   users,
+  loading: loading.models.users,
 }))
 class List extends PureComponent {
   columns = [
@@ -33,7 +34,7 @@ class List extends PureComponent {
   }
 
   render() {
-    const { users } = this.props;
+    const { users, loading } = this.props;
 
     const {
       data: { list },
@@ -42,7 +43,7 @@ class List extends PureComponent {
     return (
       <PageHeaderWrapper title="用户列表">
         <Card>
-          <Table rowKey="id" dataSource={list} columns={this.columns} />
+          <Table loading={loading} rowKey="id" dataSource={list} columns={this.columns} />
         </Card>
       </PageHeaderWrapper>
     );
