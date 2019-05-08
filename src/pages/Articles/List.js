@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Table, Card } from 'antd';
 import { connect } from 'dva';
+import moment from 'moment';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 @connect(({ users, loading }) => ({
@@ -23,6 +24,7 @@ class List extends PureComponent {
       title: '创建时间',
       dataIndex: 'created_at',
       key: 'created_at',
+      render: text => moment(text).format('YYYY-MM-DD HH:mm:ss'),
     },
   ];
 
