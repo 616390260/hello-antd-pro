@@ -33,14 +33,16 @@ class List extends PureComponent {
   }
 
   render() {
+    const { users } = this.props;
+
     const {
       data: { list },
-    } = this.props;
+    } = users;
     // const data = this.props.data;
     return (
       <PageHeaderWrapper title="用户列表">
         <Card>
-          <Table dataSource={list} columns={this.columns} />
+          <Table rowKey="id" dataSource={list} columns={this.columns} />
         </Card>
       </PageHeaderWrapper>
     );
