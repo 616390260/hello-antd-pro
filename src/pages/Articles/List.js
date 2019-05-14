@@ -35,17 +35,38 @@ class List extends PureComponent {
     });
   }
 
+  handleChange = page => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'users/fetch',
+      payload: { page },
+    });
+  };
+
   render() {
     const { users, loading } = this.props;
 
     const {
       data: { list },
     } = users;
+
+    const paginationProps = {
+      defaultPageSize: 1,
+      onChange: this.handleChange,
+      position: 'top',
+    };
+
     // const data = this.props.data;
     return (
       <PageHeaderWrapper title="用户列表">
         <Card>
-          <Table loading={loading} rowKey="id" dataSource={list} columns={this.columns} />
+          <Table
+            pagination={paginationProps}
+            loading={loading}
+            rowKey="id"
+            dataSource={list}
+            columns={this.columns}
+          />
         </Card>
       </PageHeaderWrapper>
     );
