@@ -39,7 +39,7 @@ class List extends PureComponent {
     const { dispatch } = this.props;
     dispatch({
       type: 'users/fetch',
-      payload: { page },
+      payload: { page, pageSize: 1 },
     });
   };
 
@@ -47,13 +47,14 @@ class List extends PureComponent {
     const { users, loading } = this.props;
 
     const {
-      data: { list },
+      data: { list, pagination },
     } = users;
 
     const paginationProps = {
       defaultPageSize: 1,
       onChange: this.handleChange,
-      position: 'top',
+      position: 'bottom',
+      ...pagination,
     };
 
     // const data = this.props.data;
