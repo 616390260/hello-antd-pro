@@ -54,7 +54,10 @@ class List extends PureComponent {
       defaultPageSize: 1,
       onChange: this.handleChange,
       position: 'bottom',
-      ...pagination,
+      current: pagination.current_page,
+      total: pagination.total_count,
+      pageSize: pagination.pageSize,
+      showQuickJumper: true,
     };
 
     // const data = this.props.data;
