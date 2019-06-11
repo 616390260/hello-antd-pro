@@ -43,9 +43,14 @@ const errorHandler = error => {
     });
     // @HACK
     /* eslint-disable no-underscore-dangle */
+    // localStorage.removeItem("antd-pro-authority");
+    // setAuthority("")
     window.g_app._store.dispatch({
       type: 'login/logout',
     });
+
+    window.location.reload();
+
     return;
   }
   // environment should not be used
@@ -68,6 +73,25 @@ const errorHandler = error => {
 const request = extend({
   errorHandler, // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('antd-pro-authority')}`,
+  },
 });
+
+const reloadAuthorizationInterceptors = () => {
+  request.interceptors.request.use((url, options) => {
+    return {
+      options: {
+        ...options,
+        headers: {
+          ...options.headers,
+          Authorization: `Bearer ${localStorage.getItem('antd-pro-authority')}`,
+        },
+      },
+    };
+  });
+};
+
+export { reloadAuthorizationInterceptors };
 
 export default request;

@@ -24,7 +24,7 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/users', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/products/articles', authority: ['admin', 'user', 'writer'] },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -78,6 +78,7 @@ export default [
           {
             path: '/form/basic-form',
             name: 'basicform',
+            authority: ['admin'],
             component: './Forms/BasicForm',
           },
           {
@@ -110,7 +111,7 @@ export default [
           {
             path: '/form/advanced-form',
             name: 'advancedform',
-            authority: ['admin'],
+            authority: ['writer'],
             component: './Forms/AdvancedForm',
           },
         ],

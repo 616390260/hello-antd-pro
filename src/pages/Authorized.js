@@ -8,6 +8,7 @@ import Exception403 from '@/pages/Exception/403';
 
 function AuthComponent({ children, location, routerData }) {
   const auth = getAuthority();
+  // 'admin' 'user' ['admin']
   const isLogin = auth && auth[0] !== 'guest';
   const getRouteAuthority = (path, routeData) => {
     let authorities;
@@ -25,6 +26,7 @@ function AuthComponent({ children, location, routerData }) {
     return authorities;
   };
   return (
+    // getAuthority() 取出的内容 'user'
     <Authorized
       authority={getRouteAuthority(location.pathname, routerData)}
       noMatch={isLogin ? <Exception403 /> : <Redirect to="/user/login" />}
@@ -33,6 +35,8 @@ function AuthComponent({ children, location, routerData }) {
     </Authorized>
   );
 }
-export default connect(({ menu: menuModel }) => ({
-  routerData: menuModel.routerData,
-}))(AuthComponent);
+export default connect(({ menu: menuModel }) => {
+  return {
+    routerData: menuModel.routerData,
+  };
+})(AuthComponent);

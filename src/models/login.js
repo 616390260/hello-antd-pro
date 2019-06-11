@@ -4,6 +4,7 @@ import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
+import { reloadAuthorizationInterceptors } from '@/utils/request';
 
 export default {
   namespace: 'login',
@@ -14,14 +15,22 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+      const { data, response } = yield call(fakeAccountLogin, payload);
+
+      // const res_data = { token: response.headers.get('token') }
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: data,
       });
+
+      // 把后端返回的当前权限存储到 local storage
+      // const token = jwtDecode(data.token);
+      setAuthority(data.token);
+
       // Login successfully
-      if (response.status === 'ok') {
+      if (response.status === 200) {
         reloadAuthorized();
+        reloadAuthorizationInterceptors();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
@@ -69,7 +78,6 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
       return {
         ...state,
         status: payload.status,

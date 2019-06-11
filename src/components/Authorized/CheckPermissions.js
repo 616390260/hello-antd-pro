@@ -1,5 +1,6 @@
 import React from 'react';
 import PromiseRender from './PromiseRender';
+// CURRENT 可能就是调用 getAuthority 取得当前权限
 import { CURRENT } from './renderAuthorize';
 
 /**
@@ -22,6 +23,7 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
       if (currentAuthority.some(item => authority.includes(item))) {
         return target;
       }
+      // ['admin', 'user']  ['user']
     } else if (authority.includes(currentAuthority)) {
       return target;
     }
